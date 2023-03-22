@@ -9,10 +9,11 @@ export const Welcome = defineComponent({
   setup: (props, context) => {
      return () => (<div class={s.wrapper}>
         <header>
-            <img src={logo}/>logo</header>
-            <h1>山竹记账</h1>
-        <main><RouterView/></main>
-        <footer>buttons</footer>
+            <img src={logo}/>
+            <h2>山竹记账</h2>
+            </header>
+        <main class={s.main}><RouterView/></main>
+        <footer></footer>
        </div>
      )
   }
