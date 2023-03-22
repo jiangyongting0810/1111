@@ -2,6 +2,7 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    padding-bottom: 8px;
     > .card{
       flex-grow: 1;
       display: flex;
@@ -14,18 +15,28 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+
+      
       > h2 {
         margin-top: 40px;
       }
     }
     > .actions{
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: var(--z-index-button-nav);
+      background:var(--wlcome-bg-start);
+
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 0 16px;
       font-size: 20px;
-      padding: 24px 0;
+      height: var(--welcome-nav-height);
+      padding: 0px 16px;
       color: var(--welcome-text);
+      padding-bottom: var(--welcome-nav-gap);
       > .fake{visibility: hidden;}
     }
   }
