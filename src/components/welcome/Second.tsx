@@ -4,9 +4,7 @@ import clock from '../../assets/icons/clock.svg'
 import { RouterLink } from 'vue-router';
 import { WelcomeLayout } from './WelcomeLayout';
 
-export const Second = defineComponent({
-  setup: (props, context) => {
-     return () => (
+export const Second = () =>(
         <WelcomeLayout>
           {{
             icon:<img  src={clock} />,
@@ -20,5 +18,5 @@ export const Second = defineComponent({
           }}
         </WelcomeLayout>
      )
-  }
-})
+  
+     Second.displayName = 'Second'

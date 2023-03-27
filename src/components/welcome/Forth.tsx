@@ -4,9 +4,7 @@ import chart from '../../assets/icons/chart.svg'
 import { RouterLink } from 'vue-router';
 import { WelcomeLayout } from './WelcomeLayout';
 
-export const Forth = defineComponent({
-  setup: (props, context) => {
-    return () => (
+export const Forth = () =>(
        <WelcomeLayout>
          {{
            icon:<img src={chart} />,
@@ -19,6 +17,6 @@ export const Forth = defineComponent({
            </>
          }}
        </WelcomeLayout>
-    )
-  }  
-})
+)  
+
+Forth.displayName = 'Forth'

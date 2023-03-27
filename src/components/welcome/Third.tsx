@@ -4,9 +4,8 @@ import cloud from '../../assets/icons/cloud.svg'
 import { RouterLink } from 'vue-router';
 import { WelcomeLayout } from './WelcomeLayout';
 
-export const Third = defineComponent({
-  setup: (props, context) => {
-    return () => (
+export const Third = () =>(
+
        <WelcomeLayout>
          {{
            icon:<img src={cloud} />,
@@ -19,7 +18,7 @@ export const Third = defineComponent({
            </>
          }}
        </WelcomeLayout>
-    )
-  }  
-})
 
+)
+
+Third.displayName = 'Third'
