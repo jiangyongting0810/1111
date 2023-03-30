@@ -16,7 +16,9 @@ export const Welcome = defineComponent({
     })
      return () => (<div class={s.wrapper}>
         <header>
-            <img src={logo}/>
+          <svg>
+            <use xlinkHref='#logo'></use>
+          </svg>
             <h2>山竹记账</h2>
             </header>
         <main class={s.main} ref={main}>
