@@ -39,7 +39,9 @@ export const useSwipe = (element:Ref<HTMLElement | null>)=>{
             }            
         })
         element.value?.addEventListener("touchend",e=>{
-            swiping.value = false;          
+            swiping.value = false; 
+            start.value = undefined;
+            end.value = undefined         
         })
     })
     return{start,end,swiping,distance,direction}
