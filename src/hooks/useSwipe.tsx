@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, Ref } from "vue";
+import { computed, onMounted, onUnmounted, ref, Ref } from "vue";
 
 type Point = {x:number;y:number}
 
@@ -23,26 +23,36 @@ export const useSwipe = (element:Ref<HTMLElement | null>)=>{
             return y > 0 ? "down":"up"
         }
     })
+    const onStart = (e:TouchEvent) =>{
+        start.value ={
+            x:e.touches[0].clientX,
+            y:e.touches[0].clientY
+        }
+        end.value = undefined
+        swiping.value = true
+    }
+    const onMove = (e:TouchEvent) =>{
+        end.value = {
+            x:e.touches[0].clientX,
+            y:e.touches[0].clientY
+        }            
+    }
+    const onEnd = (e:TouchEvent) =>{
+        swiping.value = false; 
+        start.value = undefined;
+        end.value = undefined         
+    }
     onMounted(()=>{
-        element.value?.addEventListener("touchstart",e=>{
-            start.value ={
-                x:e.touches[0].clientX,
-                y:e.touches[0].clientY
-            }
-            end.value = undefined
-            swiping.value = true
-        })
-        element.value?.addEventListener("touchmove",e=>{
-            end.value = {
-                x:e.touches[0].clientX,
-                y:e.touches[0].clientY
-            }            
-        })
-        element.value?.addEventListener("touchend",e=>{
-            swiping.value = false; 
-            start.value = undefined;
-            end.value = undefined         
-        })
+        element.value?.addEventListener("touchstart",onStart
+        )
+        element.value?.addEventListener("touchmove",onMove)
+        element.value?.addEventListener("touchend",onEnd)
+    })
+    onUnmounted(()=>{
+        if(!element.value){return}
+        element.value.removeEventListener("touchstart",onStart)
+        element.value.removeEventListener("touchmove",onMove)
+        element.value.removeEventListener("touchend",onEnd)
     })
     return{start,end,swiping,distance,direction}
 }
