@@ -1,18 +1,32 @@
 import { defineComponent, h, ref, Transition, VNode, watchEffect } from 'vue';
-import { RouteLocationNormalizedLoaded, RouterView } from 'vue-router';
+import { RouteLocationNormalizedLoaded, routerKey, RouterView, useRoute, useRouter } from 'vue-router';
 import s from './Welcome.module.scss'
 import logo from '../assets/icons/logo.svg'
 import { useSwipe } from '../hooks/useSwipe';
+import { throttle } from '../shared/throttle';
 
-console.log(logo);
+const pushMap:Record<string,string> ={
+  'Welcome1':'/welcome/2',
+  'Welcome2':'/welcome/3',
+  'Welcome3':'/welcome/4',
+  'Welcome4':'/start',
+}
 
 export const Welcome = defineComponent({
   setup: (props, context) => {
-    const main = ref<HTMLElement | undefined>()
-    const {direction,swiping} = useSwipe(main)
+    const main = ref<HTMLElement>()
+    const {direction,swiping} = useSwipe(main,{beforeStart:e=>e.preventDefault()})
+    const router =useRouter()
+    const route =useRoute()
+    
+    const push = throttle(()=>{
+      const name = (route.name || 'Welcome1').toString()
+      router.push(pushMap[name])
+    },500)
     watchEffect(()=>{
-      console.log(swiping.value,direction.value);
-      
+      if(swiping.value && direction.value ==='left'){
+        push()
+      }
     })
      return () => (<div class={s.wrapper}>
         <header>
