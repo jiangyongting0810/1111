@@ -3,7 +3,8 @@
     --welcome-text:#fff;
     --wlcome-bg-end: #5d33be;
     --wlcome-bg-start: #8f4cd7;
-    --z-index-button-nav:10;
+    --z-index-button-nav:8;
+    --z-index-overlay:16;
     --welcome-nav-height:64px;
     --welcome-nav-gap:8px;
     --welcome-bg-end:#8f4cd7;
@@ -18,5 +19,9 @@
     --navbar-bg-start:var(--wlcome-bg-start);
     --navbar-bg-end:var(--welcome-bg-end);
     --navbar-text:white;
-    --navbar-text:white;
+    --overlay-mask-bg: rgba(0, 0, 0, 0.5);
+    --overlay-bg: white;
+    --overlay-user-bg: #5C33BE;
+    --overlay-user-text: white;
+    --top-safe-area-height: 24px;
 }
