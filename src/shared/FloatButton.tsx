@@ -4,7 +4,8 @@ import s from './FloatButton.module.scss'
 export const FloatButton = defineComponent({
   props:{
     iconName:{
-      type:String as PropType<IconName>
+      type:String as PropType<IconName>,
+      required:true
     }
   },
   setup: (props, context) => {
