@@ -18,7 +18,9 @@ a{
 button, input {
   font: inherit;
 }
-
+ul, ol {
+  list-style: none;
+}
 // /* Box sizing rules */
 // *,
 // *::before,
