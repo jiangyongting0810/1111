@@ -8,7 +8,7 @@ export const EmojiSelect = defineComponent({
     }
   },
     setup: (props, context) => {
-      console.log(emojiList);
+      // console.log(emojiList);
       const refSelected = ref(0)
       const table: [string, string[]][] = [
         ['表情', ['face-smiling', 'face-affection', 'face-tongue', 'face-hand',
@@ -47,7 +47,7 @@ export const EmojiSelect = defineComponent({
             {table[refSelected.value][1].map(category => {
               const emojis = emojiList.find(item => item[0] === category)
               return emojis?.[1].map(item =>{
-                console.log(item);
+                // console.log(item);
                 return <li onClick={()=>onClickEmoji(item)}>{item}</li>
                 }
               )
