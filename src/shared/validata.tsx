@@ -33,5 +33,5 @@ export const validata = <T extends FData> (formData:T,rules:Rules<T>) =>{
         return
     }
   })
-  return 
+  return errors
 }
