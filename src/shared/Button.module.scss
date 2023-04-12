@@ -9,4 +9,13 @@
   &:hover{
     border: 1px solid red;
   }
+  &.normal{
+
+  }
+  &.important{
+
+  }
+  &.danger{
+    background: var(--button-bg-danger);
+  }
 }
