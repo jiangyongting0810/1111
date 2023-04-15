@@ -53,17 +53,22 @@ export const InputPad = defineComponent({
       { text: '清空', onClick: () => {refAmount.value=''} },
       { text: '提交', onClick: () => { } },
     ]
-    const refShowPop = ref(false)
+    const refDatePickerVisible = ref(false)
+    const showDatePicker = () => refDatePickerVisible.value = true
+    const hideDatePicker = () => refDatePickerVisible.value = false
+    const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
     const refAmount = ref('')
     return () => <>
       <div class={s.dateAndAmount}>
         <span class={s.date}>
           <Icon name="notes" class={s.icon} />
           <span>
-            <span onClick={() => refShowPop.value = true}>{new Time(refDate.value).format()}</span>
-            <Popup position='bottom' v-model:show={refShowPop.value}>
-              <DatetimePicker v-model={refDate.value} type="date" title="选择年月日"
-                onConfirm={() => refShowPop.value = false} />
+            <span onClick={showDatePicker}>{new Time(refDate.value).format()}</span>
+            <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
+              <DatetimePicker value={refDate.value} type="date" title="选择年月日"
+                onConfirm={setDate} 
+                onCancel={hideDatePicker}
+                />
             </Popup>
           </span>
         </span>
