@@ -2,7 +2,7 @@ import { defineComponent, reactive } from 'vue';
 import { MainLayout } from '../../layouts/MainLayout';
 import { Button } from '../../shared/Button';
 import { Icon } from '../../shared/Icon';
-import { Rules, validata } from '../../shared/validata';
+import { Rules, validate } from '../../shared/validate';
 import { TagForm } from './TagForm';
 import s from './Tag.module.scss';
 
@@ -24,7 +24,7 @@ export const TagEdit = defineComponent({
         name:undefined,
         sign:undefined
       })
-      Object.assign(errors,validata(formDate,rules))
+      Object.assign(errors,validate(formDate,rules))
       console.log(errors);
       
       e.preventDefault()

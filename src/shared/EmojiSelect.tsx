@@ -5,8 +5,12 @@ export const EmojiSelect = defineComponent({
   props: {
     modelValue:{
       type:String,
-    }
+    },
+    onUpdateModelValue: {
+      type: Function as PropType<(value: any) => void>,
+    },
   },
+  
     setup: (props, context) => {
       // console.log(emojiList);
       const refSelected = ref(0)

@@ -3,7 +3,7 @@ import { MainLayout } from '../../layouts/MainLayout';
 import { Button } from '../../shared/Button';
 import { EmojiSelect } from '../../shared/EmojiSelect';
 import { Icon } from '../../shared/Icon';
-import { Rules, validata } from '../../shared/validata';
+import { Rules, validate } from '../../shared/validate';
 import s from './Tag.module.scss';
 import { TagForm } from './TagForm';
 export const TagCreate = defineComponent({
@@ -24,7 +24,7 @@ export const TagCreate = defineComponent({
         name:undefined,
         sign:undefined
       })
-      Object.assign(errors,validata(formDate,rules))
+      Object.assign(errors,validate(formDate,rules))
       console.log(errors);
       
       e.preventDefault()
