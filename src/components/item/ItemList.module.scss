@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
   background: var(--overlay-mask-bg);
   &_inner {
     background: var(--bg);
@@ -17,5 +16,14 @@
     > main{
 
     }
+  }
+}
+.actions{
+  display: flex;
+  justify-content: space-between;
+  button{
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
