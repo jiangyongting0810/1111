@@ -9,9 +9,10 @@ export const Tabs = defineComponent({
       type: String as PropType<string>,
       required:false
     },
-  },
-  setup: (props, context) => {
     
+  },
+  emits:['update:selected'],
+  setup: (props, context) => {
     return () => {
       const array = context.slots.default?.()
       if (!array) return () => null
