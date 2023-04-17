@@ -16,7 +16,7 @@
   &.input {
     flex-grow: 1;
     border: 1px solid var(--input-border-color);
-    border-radius: var(--input-radius);
+    border-radius: var(--input-radios);
     font-size: 18px;
     font-family: inherit;
     padding-left: 16px;
@@ -25,6 +25,13 @@
     &.error {
       border-color: var(--error-color);
     }
+  }
+  &.validationCodeInput {
+    flex-grow: 0;
+    width: 10em;
+  }
+  &.validationCodeButton {
+    margin-left: 16px;
   }
 
   &_name {
@@ -41,4 +48,7 @@
     color: var(--error-color);
     font-size: 12px;
   }
+}
+.validationCodeButton {
+  margin-left: 16px;
 }

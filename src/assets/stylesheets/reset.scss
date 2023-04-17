@@ -21,6 +21,9 @@ button, input {
 ul, ol {
   list-style: none;
 }
+::-webkit-input-placeholder{
+  color:var(--placeholder) ;
+}
 // /* Box sizing rules */
 // *,
 // *::before,
