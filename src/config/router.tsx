@@ -16,6 +16,7 @@ import { ItemPage } from "../views/ItemPage";
 import { StartPage } from "../views/StartPage";
 import { Welcome } from "../views/Welcome";
 import { SignInPage } from "../views/SignInPage";
+import { StatisticsPage } from "../views/StatisticsPage";
 
 export const routes:RouteRecordRaw[] = [
     { path: '/', redirect: '/welcome' },
@@ -45,5 +46,8 @@ export const routes:RouteRecordRaw[] = [
     },
     {
       path:'/sign_in',component:SignInPage
+    },
+    {
+      path:'/statisticspage',component:StatisticsPage
     }
   ]
