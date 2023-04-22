@@ -20,6 +20,10 @@ export const SignInPage = defineComponent({
       email:[],
       code:[]
     })
+    const onClickSendValidationCode = ()=>{
+      console.log("11");
+      
+    }
     const onSubmit = (e:Event)=>{
       
       Object.assign(errors,{
@@ -47,7 +51,12 @@ export const SignInPage = defineComponent({
             </div>
             <Form onSubmit={onSubmit}>
               <FormItem label='邮箱地址' placeholder='请输入邮箱然后点记发送验证码' type='text' v-model={formData.email} error={errors.email?.[0]}/>
-              <FormItem label='验证码' placeholder='请输入六位验证码'  type='validationCode' v-model={formData.code} error={errors.code?.[0]}/>
+              <FormItem label='验证码' 
+                placeholder='请输入六位验证码'  
+                type='validationCode' 
+                onClick={onClickSendValidationCode}
+                v-model={formData.code} 
+                error={errors.code?.[0]}/>
               <FormItem style={{paddingTop:"96px"}}>
                 <Button>登录</Button>
               </FormItem>
