@@ -3,6 +3,7 @@ import { computed, defineComponent, PropType, ref } from 'vue';
 import { Button } from './Button';
 import { EmojiSelect } from './EmojiSelect';
 import s from './Form.module.scss';
+import { getFriendlyError } from './getfriendltError';
 import { Time } from './time';
 export const Form = defineComponent({
   props: {
@@ -37,7 +38,7 @@ export const FormItem = defineComponent({
     options:Array as PropType<Array<{value:string,text:string}>>,
     countFrom:{
       type:Number,
-      default:60
+      default:3
     }
   },
   emits:['update:modelValue'],
@@ -60,7 +61,7 @@ export const FormItem = defineComponent({
       switch(props.type){
         case'text':
           return<input 
-            // value={props.modelValue}
+            value={props.modelValue}
             placeholder={props.placeholder}
             onInput={(e:any)=>context.emit('update:modelValue',e.target.value)}
             class={[s.formItem,s.input]}/>
@@ -118,7 +119,7 @@ export const FormItem = defineComponent({
             {content.value}
           </div>
             <div class={s.formItem_errorHint}>
-              <span>{props.error ?? '　'}</span>
+              <span>{props.error ?getFriendlyError(props.error) : '　'}</span>
             </div>
         </label>
       </div>
