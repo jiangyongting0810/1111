@@ -1,10 +1,9 @@
-import axios from 'axios';
-import { defineComponent, PropType, reactive, ref } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { useBool } from '../hooks/useBool';
 import { MainLayout } from '../layouts/MainLayout';
 import { Button } from '../shared/Button';
 import { Form, FormItem } from '../shared/Form';
-import { history } from '../shared/history';
 import { http } from '../shared/Http';
 import { Icon } from '../shared/Icon';
 import { hasError, validate } from '../shared/validate';
@@ -21,6 +20,8 @@ export const SignInPage = defineComponent({
     })
     const refValidationCode = ref<any>()
     const {ref:refDisabled,toogle,on:disabled,off:enable} = useBool(false)
+    const router = useRouter()
+    const route = useRoute()
     const onSubmit = async (e: Event) => {
       console.log('submit')
       e.preventDefault()
@@ -34,8 +35,12 @@ export const SignInPage = defineComponent({
       ]))
       if(!hasError(errors)){
         const response = await http.post<{jwt:string}>('/session',formData)
+          .catch(onError)
         localStorage.setItem('jwt',response.data.jwt)
-        history.push('/')
+        // router.push('/sign_in?return_to='+encodeURIComponent(route.fullPath))
+        const returnTo = route.query.return_to?.toString()
+        router.push(returnTo || '/')
+
       }
     }
     const onError = (error:any) => {
