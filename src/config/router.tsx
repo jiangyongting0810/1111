@@ -20,7 +20,48 @@ import { StatisticsPage } from "../views/StatisticsPage";
 import { http } from "../shared/Http";
 
 
-export const routes:RouteRecordRaw[] = [
+// export const routes: RouteRecordRaw[] = [
+//   { path: '/', redirect: '/welcome' },
+//   {
+//     path: '/welcome',
+//     component: Welcome,
+//     beforeEnter: (to, from, next) => {
+//       localStorage.getItem('skipFeatures') === 'yes' ? next('/start') : next()
+//     },
+//     children: [
+//       { path: '', redirect: '/welcome/1' },
+//       { path: '1', name: "Welcome1", components: { main: First, footer: FirstActions }, },
+//       { path: '2', name: "Welcome2", components: { main: Second, footer: SecondActions }, },
+//       { path: '3', name: "Welcome3", components: { main: Third, footer: ThirdActions }, },
+//       { path: '4', name: "Welcome4", components: { main: Forth, footer: ForthActions }, },
+//     ]
+//   },
+//   { path: '/start', component: StartPage },
+//   {
+//     path: '/items', component: ItemPage,
+//     children: [
+//       { path: '', component: ItemList },
+//       { path: 'create', component: ItemCreate },
+//     ]
+//   },
+//   {
+//     path: '/tags', component: TagPage,
+//     children: [
+//       { path: 'create', component: TagCreate },
+//       { path: ':id/edit', component: TagEdit }
+//     ]
+//   },
+//   {
+//     path: '/sign_in', component: SignInPage
+//   },
+//   {
+//     path: '/statistics', component: StatisticsPage
+//   }
+// ]
+
+
+
+  export const routes:RouteRecordRaw[] = [
     { path: '/', redirect: '/welcome' },
     {
       path:'/welcome',
@@ -37,21 +78,22 @@ export const routes:RouteRecordRaw[] = [
       ]
     },
     {path:'/start',component:StartPage},
+    // {path:'/items',component:ItemPage,
+    //   children:[
+    //     {path:'',component:ItemList},
+    //     {path:'create',component:ItemCreate}
+    //   ]
+    // },
     {
-      path:'/items',component:ItemPage,
-      beforeEnter:async (to,from,next)=>{
-        await http.get('/me').catch(() => {
-          next('/sign_in?return_to=' + to.path) 
-         })
-        next()
-      },
-      children:[
-        {path:'',component:ItemList},
-        {path:'create',component:ItemCreate}
+      path: '/items', component: ItemPage,
+      children: [
+        { path: '', component: ItemList },
+        { path: 'create', component: ItemCreate },
       ]
     },
     {
       path:'/tags',component:TagPage,
+      
       children:[
         {path:'create',component:TagCreate},
         {path:':id/edit',component:TagEdit}

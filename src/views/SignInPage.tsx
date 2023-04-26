@@ -6,6 +6,7 @@ import { Button } from '../shared/Button';
 import { Form, FormItem } from '../shared/Form';
 import { http } from '../shared/Http';
 import { Icon } from '../shared/Icon';
+import { refreshMe } from '../shared/me';
 import { hasError, validate } from '../shared/validate';
 import s from './SignInPage.module.scss';
 export const SignInPage = defineComponent({
@@ -39,8 +40,8 @@ export const SignInPage = defineComponent({
         localStorage.setItem('jwt',response.data.jwt)
         // router.push('/sign_in?return_to='+encodeURIComponent(route.fullPath))
         const returnTo = route.query.return_to?.toString()
-        router.push(returnTo || '/')
-
+        refreshMe()
+          router.push(returnTo || '/')
       }
     }
     const onError = (error:any) => {
@@ -95,3 +96,4 @@ export const SignInPage = defineComponent({
     )
   }
 })
+
