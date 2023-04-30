@@ -14,10 +14,10 @@ export const Tabs = defineComponent({
   emits:['update:selected'],
   setup: (props, context) => {
     return () => {
-      const array = context.slots.default?.()
-      if (!array) return () => null
-      for (let i = 0;i < array.length; i++){
-        if(array[i].type !== Tab){
+      const tabs = context.slots.default?.()
+      if (!tabs) return () => null
+      for (let i = 0;i < tabs.length; i++){
+        if(tabs[i].type !== Tab){
           throw new Error("need Tab")
         }
       }
@@ -26,7 +26,7 @@ export const Tabs = defineComponent({
 
       return <div class={[s.tabs,cp + '_tabs']}>
         <ol class={[s.tabs_nav, cp + '_tabs_nav']}>
-          {array.map(item =>
+          {tabs.map(item =>
             <li class={[
               item.props?.name === props.selected ? [s.selected,cp+'selected']:'',
               cp + '_tabs_nav_item'
@@ -37,14 +37,14 @@ export const Tabs = defineComponent({
             )}
         </ol>
         <div>
-            {array.find(item => item.props?.name === props.selected)}
+          {tabs.map(item =>
+            <div v-show={item.props?.name === props.selected}>{item}</div>
+          )}
         </div>
       </div>
     }
-     
   }
 })
-
 
 export const Tab = defineComponent({
   props: {
