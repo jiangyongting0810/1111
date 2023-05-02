@@ -25,3 +25,19 @@ type Resources<T = any> = {
     count: number
   }
 }
+
+type Item = {
+  id: number,
+    user_id: number,
+    amount: number,
+    tag_ids: number[],
+    happened_at: string,
+    kind: "expenses" | "icome",
+}
+
+type Resource<T> = {
+  resource:T
+}
+type ResourceError = {
+  errors:Record<string,string[]>
+}
