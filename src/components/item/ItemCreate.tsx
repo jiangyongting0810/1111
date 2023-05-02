@@ -1,10 +1,7 @@
-import { defineComponent, onMounted, PropType, ref } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import { MainLayout } from '../../layouts/MainLayout';
-import { Button } from '../../shared/Button';
-import { http } from '../../shared/Http';
 import { Icon } from '../../shared/Icon';
 import { Tabs, Tab } from '../../shared/Tabs';
-import { useTags } from '../../shared/useTags';
 import { InputPad } from './InputPad';
 import s from './ItemCreate.module.scss';
 import { Tags } from './Tags';
@@ -16,14 +13,9 @@ export const ItemCreate = defineComponent({
   },
   setup: (props, context) => {
     const refKind = ref('支出')
-    
-    const {tags:incomeTags,page:page2,hasMore:hasMore2,fetchTags:fetchTags2} = useTags((page)=>{
-      return http.get<Resources<Tag>>('/tags',{
-        kind:'income',
-        page: page + 1,
-        _mock:'tagIndex'
-      })
-    })
+    const refTagId = ref<number>()
+    const refHappenAt = ref<string>(new Date().toISOString())
+    const refAmount = ref<number>(0)
     return () => (
       <MainLayout class={s.layout}>{{
         title: () => '记一笔',
@@ -35,14 +27,18 @@ export const ItemCreate = defineComponent({
             onUpdate:selected={()=>console.log(1)}
             class={s.tabs}>
               <Tab name="支出">
-                <Tags kind = 'expenses' key='expenses'/>
+                {refAmount.value}
+                <Tags kind = 'expenses' v-model:selected={refTagId.value}/>
               </Tab>
               <Tab name="收入" >
-                <Tags kind='income'key='income'/>
+                <Tags kind='income' v-model:selected={refTagId.value}/>
               </Tab>
             </Tabs>
             <div class={s.inputPad_wrapper}>
-              <InputPad />
+              <div>{refHappenAt.value}</div>
+              <InputPad 
+              v-model:happenAt={refHappenAt.value}
+              v-model:amount={refAmount.value}/>
             </div>
           </div>
         </>
