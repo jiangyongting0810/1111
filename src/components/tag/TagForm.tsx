@@ -11,9 +11,9 @@ export const TagForm = defineComponent({
   setup: (props, context) => {
     const route = useRoute()
     //防止用户改掉URL
-    if(!route.query.kind){
-      return ()=><div>参数错误</div>
-    }
+    // if(!route.query.kind){
+    //   return ()=><div>参数错误</div>
+    // }
     const formData = reactive({
       name:'',
       sign:'',
