@@ -5,6 +5,7 @@ import { Icon } from '../../shared/Icon';
 import { Rules, validate } from '../../shared/validate';
 import { TagForm } from './TagForm';
 import s from './Tag.module.scss';
+import { BackIcon } from '../../shared/BackIcon';
 
 export const TagEdit = defineComponent({
   
@@ -32,7 +33,7 @@ export const TagEdit = defineComponent({
     return () => (
       <MainLayout>{{
         title: () => '修改标签',
-        icon: () => <Icon name="back" onClick={() => { }} />,
+        icon: () => <BackIcon/>,
         default: () => <>
           <TagForm/>
           <div class={s.actions}>
