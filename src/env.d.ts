@@ -30,8 +30,8 @@ type Item = {
   id: number,
     user_id: number,
     amount: number,
-    tag_ids: number[],
-    happened_at: string,
+    tags_id: number[],
+    happen_at: string,
     kind: "expenses" | "icome",
 }
 
