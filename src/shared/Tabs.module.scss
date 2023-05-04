@@ -1,7 +1,9 @@
 .tabs {
   position: relative;
+  overflow: auto;
   &_nav {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     color: var(--navbar-text);
