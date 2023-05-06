@@ -25,6 +25,10 @@ type Resources<T = any> = {
     count: number
   }
 }
+type User = {
+  id:numberl;
+  email:string
+}
 
 type Item = {
   id: number,
