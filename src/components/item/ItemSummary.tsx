@@ -1,5 +1,5 @@
 import Button from 'vant/lib/button/Button';
-import { defineComponent, onMounted, PropType, reactive, ref } from 'vue';
+import { defineComponent, onMounted, PropType, reactive, ref, watch } from 'vue';
 import { Datetime } from '../../shared/Datetime';
 import { FloatButton } from '../../shared/FloatButton';
 import { http } from '../../shared/Http';
@@ -37,8 +37,16 @@ export const ItemSummary = defineComponent({
     const itemsBalance = reactive({
       expenses: 0, income: 0, balance: 0
     })
+
+    watch(()=>[props.startDate,props.endDate],()=>{
+      console.log("观察两个数据变化");
+      items.value = []
+      hasMore.value = false
+      page.value = 0
+      fetchItems()
+    })
     
-    onMounted(async()=>{
+    const fetchItemsBalance = async()=>{
       if(!props.startDate || !props.endDate){ return }
       const response = await http.get('/items/balance',{
         happen_after: props.startDate,
@@ -47,6 +55,13 @@ export const ItemSummary = defineComponent({
         _mock: 'itemIndexBalance',
       })
       Object.assign(itemsBalance,response.data)
+    }
+    onMounted(fetchItemsBalance)
+    watch(()=>[props.startDate,props.endDate],()=>{
+      Object.assign(itemsBalance,{
+        expenses: 0, income: 0, balance: 0
+      })
+      fetchItemsBalance()
     })
     return () => (
       <div class={s.wrapper}>
