@@ -33,13 +33,21 @@ export const mockItemIndex: Mock = (config) => {
     per_page,
     count,
   })
-
+  const createTag = (attrs?:any) =>
+  ({
+    id: createId(),
+    name: faker.lorem.word(),
+    sign: faker.internet.emoji(),
+    kind: config.params.kind,
+    ...attrs
+  })
   const createItem = (n = 1, attrs?: any) =>
     Array.from({ length: n }).map(() => ({
       id: createId(),
       user_id: createId(),
       amount: Math.floor(Math.random() * 10000),
       tags_id: [createId()],
+      tags:[createTag()],
       happen_at: faker.date.past().toISOString(),
       kind: config.params.kind,
     }))
@@ -110,6 +118,7 @@ export const mockTagIndex: Mock = (config) => {
   const createPager =(page:number = 1)=>({
     page,per_page,count
   })
+  
   const createTag = (n = 1, attrs?: any) =>
     Array.from({ length: n }).map(() => ({
       id: createId(),
