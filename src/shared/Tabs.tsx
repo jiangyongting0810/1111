@@ -9,7 +9,10 @@ export const Tabs = defineComponent({
       type: String as PropType<string>,
       required:false
     },
-    
+    rerenderOnSelectg:{
+      type:Boolean as PropType<boolean>,
+      default:false
+    }
   },
   emits:['update:selected'],
   setup: (props, context) => {
@@ -24,24 +27,28 @@ export const Tabs = defineComponent({
 
       const cp = props.classPrefix
 
-      return <div class={[s.tabs,cp + '_tabs']}>
+      return (
+      <div class={[s.tabs,cp + '_tabs']}>
         <ol class={[s.tabs_nav, cp + '_tabs_nav']}>
           {tabs.map(item =>
-            <li class={[
-              item.props?.name === props.selected ? [s.selected,cp+'selected']:'',
-              cp + '_tabs_nav_item'
-            ]}
+            <li class={[item.props?.name === props.selected ? [s.selected,cp+'selected']:'',cp + '_tabs_nav_item']}
                 onClick ={()=>context.emit('update:selected',item.props?.name)}>
-                  {item.props?.name}
+                {item.props?.name}
             </li>
             )}
         </ol>
+        {props.rerenderOnSelectg ?
+        <div key={props.selected}>
+          {tabs.find(item=>item.props?.name === props.selected)}
+        </div>:
         <div>
           {tabs.map(item =>
             <div v-show={item.props?.name === props.selected}>{item}</div>
           )}
         </div>
+        }
       </div>
+      )
     }
   }
 })

@@ -54,6 +54,6 @@ import { StatisticsPage } from "../views/StatisticsPage";
       path:'/sign_in',component:SignInPage
     },
     {
-      path:'/statisticspage',component:StatisticsPage
+      path:'/statistics',component:StatisticsPage
     }
   ]
