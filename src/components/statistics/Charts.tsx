@@ -10,6 +10,8 @@ import { time } from 'echarts';
 
 type Data1Item = {happen_at:string,amount:number}
 type Data1 = Data1Item[]
+type Data2Item = {tag_id:number,tag:Tag,amount:number}
+type Data2 = Data2Item[]
 const DAY = 24 * 3600 * 1000
 export const Charts = defineComponent({
   props: {
@@ -23,7 +25,7 @@ export const Charts = defineComponent({
     }
   },
   setup: (props, context) => {
-    const category = ref('expenses')
+    const kind = ref('expenses')
     //方便知道类型，并且赋值为空数
     const data1 = ref<Data1>([])
     //转换成需要的数据格式
@@ -41,20 +43,45 @@ export const Charts = defineComponent({
 
     onMounted(async()=>{
       const response = await http.get<{groups:Data1,summary:number}>('/items/summary',{
+        happen_after:props.startDate,
+        happen_before:props.endDate,
+        kind:kind.value,
+        group_by:'happen_at',
         _mock:'itemSummary'
       })
       console.log('response.data')
       console.log(response.data)
       data1.value = response.data.groups
     })
+
+    // data2
+    const data2 = ref<Data2>([])
+    const betterData2 = computed<{name:string,value:number}[]>(()=>
+      data2.value.map(item => ({
+        name:item.tag.name,
+        value:item.amount
+      }))
+    )
+
+    onMounted(async()=>{
+      const response = await http.get<{ groups: Data2; summary: number }>('/items/summary', {
+        happen_after: props.startDate,
+        happen_before: props.endDate,
+        kind: kind.value,
+        group_by: 'tag_id',
+        _mock: 'itemSummary'
+      })
+      data2.value = response.data.groups
+    })
+
     return () => (
       <div class={s.wrapper}>
         <FormItem label='类型' type='select' options={[
           {value:'expenses',text:'支出'},
           {value:'income',text:'收入'}
-        ]} v-model={category.value}/>
+        ]} v-model={kind.value}/>
         <LineChart data={betterData1.value}/>
-        <PieChart/>
+        <PieChart data={betterData2.value}/>
         <Bars/>
       </div>
     )
