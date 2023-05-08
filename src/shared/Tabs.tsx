@@ -9,7 +9,7 @@ export const Tabs = defineComponent({
       type: String as PropType<string>,
       required:false
     },
-    rerenderOnSelectg:{
+    rerenderOnSelect:{
       type:Boolean as PropType<boolean>,
       default:false
     }
@@ -37,7 +37,7 @@ export const Tabs = defineComponent({
             </li>
             )}
         </ol>
-        {props.rerenderOnSelectg ?
+        {props.rerenderOnSelect ?
         <div key={props.selected}>
           {tabs.find(item=>item.props?.name === props.selected)}
         </div>:
