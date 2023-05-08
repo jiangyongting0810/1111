@@ -6,6 +6,7 @@ import { PieChart } from './PieChart';
 import { Bars } from './Bars';
 import { http} from '../../shared/Http';
 import { Time } from '../../shared/time';
+import { time } from 'echarts';
 
 type Data1Item = {happen_at:string,amount:number}
 type Data1 = Data1Item[]
@@ -28,24 +29,15 @@ export const Charts = defineComponent({
     //转换成需要的数据格式
     const betterData1 = computed<[string,number][]>(()=>{
       if(!props.startDate || !props.endDate){ return []}
-      const array = []
       const diff = new Date(props.endDate).getTime() - new Date(props.startDate).getTime()
       const n = diff / DAY + 1
-      let data1Index = 0
-      for(let i=0; i<n; i++){
+      return Array.from({length:n}).map((_,i)=>{
         const time = new Time(props.startDate+'T00:00:00.000+0800').add(i,'day').getTimestamp()
-        if(data1.value[data1Index] && new Date(data1.value[data1Index].happen_at).getTime() === time){
-          array.push([new Date(time).toISOString(),data1.value[data1Index].amount])
-          data1Index += 1
-        }else{
-          array.push([new Date(time).toISOString(),0])
-        }
-      }
-      return array as [string,number][]
-      
-      // return data1.value.map(item=>[item.happen_at,item.amount] as [string,number])
-    }
-    )
+        const item = data1.value[0]
+        const amount =(item && new Date(item.happen_at).getTime() === time) ? data1.value.shift()!.amount : 0
+        return [new Date(time).toISOString(),amount]
+      })
+    })
 
     onMounted(async()=>{
       const response = await http.get<{groups:Data1,summary:number}>('/items/summary',{
