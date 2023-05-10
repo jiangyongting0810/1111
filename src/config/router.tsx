@@ -13,10 +13,10 @@ import { SecondActions } from "../components/welcome/SecondActions";
 import { Third } from "../components/welcome/Third";
 import { ThirdActions } from "../components/welcome/ThirdActions";
 import { ItemPage } from "../views/ItemPage";
-import { StartPage } from "../views/StartPage";
 import { Welcome } from "../views/Welcome";
 import { SignInPage } from "../views/SignInPage";
 import { StatisticsPage } from "../views/StatisticsPage";
+import { ComingSoon } from "../shared/ComingSoon";
 
   export const routes:RouteRecordRaw[] = [
     { path: '/', redirect: '/welcome' },
@@ -54,5 +54,9 @@ import { StatisticsPage } from "../views/StatisticsPage";
     },
     {
       path:'/statistics',component:StatisticsPage
+    },{
+      path: '/export', component: ComingSoon
+    },{
+      path: '/notify', component: ComingSoon
     }
   ]
