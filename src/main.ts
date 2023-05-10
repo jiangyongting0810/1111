@@ -12,14 +12,10 @@ fetchMe()
 
 const whiteList:Record<string,'exact' | 'startsWith' > = {
   '/' : 'exact',
-  '/start': 'exact',
+  '/items': 'exact',
   '/welcome': 'startsWith',
   '/sign_in': 'startsWith',
 }
-
-// const whiteList = {
-//   exact:['/','/start'],
-// }
 
 router.beforeEach(async (to, from) => {
   for(const key in whiteList){
