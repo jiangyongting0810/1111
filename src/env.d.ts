@@ -15,7 +15,7 @@ type Tag = {
   name: string,
   sign: string,
   deleted_at: string | null,
-  kind: expenses | income
+  kind: "expenses" | "income"
 }
 type Resources<T = any> = {
   resources: T[]
@@ -34,7 +34,7 @@ type Item = {
   id: number,
   user_id: number,
   amount: number,
-  tags_id: number[],
+  tag_ids: number[],
   tags?:Tag[],
   happen_at: string,
   kind: "expenses" | "icome",
@@ -46,3 +46,4 @@ type Resource<T> = {
 type ResourceError = {
   errors:Record<string,string[]>
 }
+type FormErrors<T> = {[k in keyof typeof T]:string[]}
