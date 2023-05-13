@@ -63,8 +63,27 @@ export const ItemCreate = defineComponent({
         return
       }
       await http.post<Resource<Item>>('/items',formData,{_mock:'itemCreate',_autoLoading:true}
-      ).catch(onError)
-      router.push("/items")
+      )
+      .then(() => router.push("/items"),
+      (response) => {
+        // 在这里对响应数据进行修改
+        const modifiedResponse = {
+          ...response,
+          errors: {
+            // 修改errors对象，可以自定义错误消息或者进行翻译等操作
+            tag_ids: ["标签必填"]
+          }
+        };
+  
+        // 处理修改后的响应数据
+        console.log(modifiedResponse);
+        Dialog.alert({
+          title: '出错',
+          message: modifiedResponse.errors.tag_ids[0]
+        })
+      })
+      .catch(onError)
+
     }
     return () => (
       <MainLayout class={s.layout}>{{
