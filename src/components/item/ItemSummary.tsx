@@ -92,6 +92,7 @@ export const ItemSummary = defineComponent({
               {itemStore.items.map((item) => (
                 <li>
                   <div class={s.sign}>
+                    {item.kind}
                     <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
                   </div>
                   <div class={s.text}>
