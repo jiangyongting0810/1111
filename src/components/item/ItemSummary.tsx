@@ -10,6 +10,7 @@ import { Icon } from '../../shared/Icon'
 import { Money } from '../../shared/Money'
 import { useItemStore } from '../../stores/useItemStore'
 import { useMeStore } from '../../stores/useMeStore'
+import { BalanceSymbol } from './BalanceSymbol'
 import s from './ItemSummary.module.scss'
 export const ItemSummary = defineComponent({
   props: {
@@ -92,13 +93,15 @@ export const ItemSummary = defineComponent({
               {itemStore.items.map((item) => (
                 <li>
                   <div class={s.sign}>
-                    {item.kind}
+                    
                     <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
                   </div>
                   <div class={s.text}>
                     <div class={s.tagAndAmount}>
                       <span class={s.tag}>{item.tags && item.tags.length > 0 ? item.tags[0].name : '未分类'}</span>
                       <span class={s.amount}>
+                        {/* <BalanceSymbol value={item.kind}/> */}
+                      {item.kind === 'expenses' ? "-" :"+"}
                         ￥<Money value={item.amount} />
                       </span>
                     </div>
