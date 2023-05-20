@@ -69,7 +69,13 @@ export const ItemSummary = defineComponent({
     )
     return () => (
       (!props.startDate || !props.endDate)? 
-        <div>请先选择时间范围</div> : (
+      <>
+      <Center class={s.lose_wrapper} direction='|'>
+        <Icon name="lose" class={s.pig} />
+        <p>请点击上方选择时间</p>
+      </Center>
+      
+      </> : (
       <div class={s.wrapper}>
         {itemStore.items && itemStore.items.length > 0 ? (
           <>
@@ -120,15 +126,16 @@ export const ItemSummary = defineComponent({
           </>
         ) : (
           <>
-            <Center class={s.pig_wrapper}>
-              <Icon name="pig" class={s.pig} />
-            </Center>
-            <div class={s.button_wrapper}>
-              <RouterLink to="/items/create">
-                <Button class={s.button}>开始记账</Button>
-              </RouterLink>
-            </div>
-          </>
+              <Center class={s.pig_wrapper} direction="|">
+                <Icon name="pig" class={s.pig} />
+                <p>目前没有数据</p>
+              </Center>
+              <div class={s.button_wrapper}>
+                <RouterLink to="/items/create">
+                  <Button class={s.button}>开始记账</Button>
+                </RouterLink>
+              </div>
+            </>
         )}
         <RouterLink to="/items/create">
           <FloatButton iconName="add" />

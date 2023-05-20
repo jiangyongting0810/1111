@@ -3,7 +3,7 @@ import s from './Icon.module.scss'
 
 export type IconName = 'add' | 'chart'| 'clock'|
  'cloud' |'logo'|'pig'|'menu'| 'charts' | 'notify' | 
- 'export' |'back' | 'notes'
+ 'export' |'back' | 'notes' | 'lose'
 
 export const Icon = defineComponent({
   props:{

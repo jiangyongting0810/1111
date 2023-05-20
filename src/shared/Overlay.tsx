@@ -1,6 +1,7 @@
+import { use } from 'echarts';
 import { Dialog } from 'vant';
 import { defineComponent, onMounted, PropType, ref } from 'vue';
-import { RouterLink, useRoute } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { useMeStore } from '../stores/useMeStore';
 import { Icon } from './Icon';
 import s from './Overlay.module.scss'
@@ -16,6 +17,7 @@ export const Overlay = defineComponent({
       props.onClose?.()
     }
     const route = useRoute()
+    const router = useRouter()
     const me = ref<User>()
     onMounted(async ()=>{
       const response = await meStore.mePromise
@@ -28,6 +30,8 @@ export const Overlay = defineComponent({
         message:'你确定要退出吗？'
       })
       localStorage.removeItem('jwt')
+      window.location.reload()
+      router.push('/')
     }
     return () => (
       <>
