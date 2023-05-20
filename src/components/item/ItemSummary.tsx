@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, onUnmounted, PropType, reactive, ref, watch } from 'vue'
+import { defineComponent, PropType, reactive, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useAfterMe } from '../../hooks/useAfterMe'
 import { Button } from '../../shared/Button'
@@ -9,8 +9,6 @@ import { http } from '../../shared/Http'
 import { Icon } from '../../shared/Icon'
 import { Money } from '../../shared/Money'
 import { useItemStore } from '../../stores/useItemStore'
-import { useMeStore } from '../../stores/useMeStore'
-import { BalanceSymbol } from './BalanceSymbol'
 import s from './ItemSummary.module.scss'
 export const ItemSummary = defineComponent({
   props: {
@@ -24,9 +22,7 @@ export const ItemSummary = defineComponent({
     }
   },
   setup: (props, context) => {
-    if (!props.startDate || !props.endDate) {
-      return () => <div>请先选择时间范围</div>
-    }
+    
     const itemStore = useItemStore(['items', props.startDate, props.endDate])
     useAfterMe(() => itemStore.fetchItems(props.startDate, props.endDate))
 
@@ -34,7 +30,7 @@ export const ItemSummary = defineComponent({
       () => [props.startDate, props.endDate],
       () => {
         itemStore.$reset()
-        itemStore.fetchItems()
+        itemStore.fetchItems(props.startDate, props.endDate)
       }
     )
 
@@ -72,6 +68,8 @@ export const ItemSummary = defineComponent({
       }
     )
     return () => (
+      (!props.startDate || !props.endDate)? 
+        <div>请先选择时间范围</div> : (
       <div class={s.wrapper}>
         {itemStore.items && itemStore.items.length > 0 ? (
           <>
@@ -136,6 +134,7 @@ export const ItemSummary = defineComponent({
           <FloatButton iconName="add" />
         </RouterLink>
       </div>
+      )
     )
   }
 })
