@@ -26,7 +26,6 @@ export const SignInPage = defineComponent({
     const router = useRouter()
     const route = useRoute()
     const onSubmit = async (e: Event) => {
-      console.log('submit')
       e.preventDefault()
       Object.assign(errors, {
         email: [], code: []
@@ -39,7 +38,7 @@ export const SignInPage = defineComponent({
       if(!hasError(errors)){
         const response = await http.post<{jwt:string}>('/session',formData,{_autoLoading:true})
           .catch(onError)
-        console.log(response)
+        // console.log(response)
         localStorage.setItem('jwt',response.data.jwt)
         // router.push('/sign_in?return_to='+encodeURIComponent(route.fullPath))
         const returnTo = route.query.return_to?.toString()

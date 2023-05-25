@@ -22,7 +22,6 @@ export const Tags = defineComponent({
       },{_mock:'tagIndex',_autoLoading:true})
     })
     const onSelect = (tag:Tag) => {
-      console.log(tag);
       context.emit('update:selected',tag.id)
     }
     const timer = ref<number>()

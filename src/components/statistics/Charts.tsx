@@ -49,7 +49,7 @@ export const Charts = defineComponent({
         group_by:'happen_at',
       },{_mock:'itemSummary'})
       console.log('response.data')
-      console.log(response.data)
+      // console.log(response.data)
       data1.value = response.data.groups
     }
     onMounted(fetchData1)

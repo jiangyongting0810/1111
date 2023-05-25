@@ -88,7 +88,7 @@ export const OverlayIcon = defineComponent({
     const overlayVisible = ref(false)
     const onClickMenu = () =>{
       overlayVisible.value = !overlayVisible.value
-      console.log('Overlay');
+      // console.log('Overlay');
     }
     return() => <>
     <Icon name='menu' class={s.navIcon} onClick={onClickMenu}/>
