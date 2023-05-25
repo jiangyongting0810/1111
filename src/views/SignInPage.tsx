@@ -75,7 +75,7 @@ export const SignInPage = defineComponent({
                 <Icon class={s.icon} name="logo" />
                 <h1 class={s.appName}>山竹记账</h1>
               </div>
-              <div>{JSON.stringify(formData)}</div>
+              {/* <div>{JSON.stringify(formData)}</div> */}
               <Form onSubmit={onSubmit}>
                 <FormItem label="邮箱地址" type="text"
                   placeholder='请输入邮箱，然后点击发送验证码'
@@ -84,7 +84,7 @@ export const SignInPage = defineComponent({
                   label="验证码" 
                   type="validationCode"
                   placeholder='请输入六位数字'
-                  countFrom={3}
+                  countFrom={60}
                   disabled={refDisabled.value}
                   onClick={onClickSendValidationCode}
                   v-model={formData.code} error={errors.code?.[0]} />

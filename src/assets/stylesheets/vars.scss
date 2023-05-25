@@ -7,7 +7,7 @@
   --button-border-color: #ddd;
   --button-font-size:18px;
   --button-height:48px;
-  --button-radios:4px;
+  --button-radios:6px;
   --button-text:white;
   --date-text: #999999;
   --dialog-header-text: white;
@@ -18,7 +18,7 @@
   --float-button-text:white;
   --input-border-color: #5c33be;
   --input-min-height: 48px;
-  --input-radius: var(--button-radios);
+  --input-radios: var(--button-radios);
   --input-shadow: rgba(0,0,0,0.25);
   --list-amount-text: var(--amount-text);
   --list-tag-text: #333;
