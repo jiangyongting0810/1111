@@ -18,8 +18,8 @@ export const SignInPage = defineComponent({
       code: ''
     })
     const errors = reactive({
-      email: [],
-      code: []
+      email: [] as string[],
+      code: [] as string[]
     })
     const refValidationCode = ref<any>()
     const {ref:refDisabled,toogle,on:disabled,off:enable} = useBool(false)
@@ -38,7 +38,7 @@ export const SignInPage = defineComponent({
       if(!hasError(errors)){
         const response = await http.post<{jwt:string}>('/session',formData,{_autoLoading:true})
           .catch(onError)
-        // console.log(response)
+        
         localStorage.setItem('jwt',response.data.jwt)
         // router.push('/sign_in?return_to='+encodeURIComponent(route.fullPath))
         const returnTo = route.query.return_to?.toString()
@@ -48,8 +48,16 @@ export const SignInPage = defineComponent({
     }
     const onError = (error:any) => {
       if(error.response.status === 422){
-        Object.assign(errors,error.response.data.errors)
+        if(error.response.data.errors="找不到对应的记录"){          
+          console.log(error.response.data.errors);
+          errors.email = ["验证码错误"]  
+        }
+        // Object.assign(errors,error.response.data.errors)
+
+        
       }
+      console.log('验证码提交出错')
+      console.log(error.response.data.errors)
       throw error
     }
     const onClickSendValidationCode = async () => {
