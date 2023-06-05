@@ -1,8 +1,11 @@
+.title{
+  color: white;
+}
 .wrapper{
     height: calc(100vh - var(--welcome-nav-height));
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(to bottom,var(--wlcome-bg-end) 0%, var(--wlcome-bg-start) 100%);
+    background-image: linear-gradient(to bottom, var(--welcome-bg-start) 0%, var(--welcome-bg-end) 100%);
     margin-bottom: var(--welcome-nav-height);
     >header{
         flex-shrink: 0;
